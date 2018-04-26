@@ -1,0 +1,12 @@
+# Rerouting access to unintended for viewing files/directories
+# more here: http://httpd.apache.org/docs/2.2/content-negotiation.html
+Options -MultiViews
+
+RewriteEngine On
+Options -Indexes
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
